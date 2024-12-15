@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import React from "react";
 import Swal from "sweetalert2";
+import { FaGithub } from "react-icons/fa";
 
 type Props = {};
 
@@ -21,50 +22,69 @@ const page = () => {
   };
 
   return (
-    <div>
-      <h1 className="text-4xl font-bold text-primary">Latest projects</h1>
-      <p className="text-lg">
-        Some code and bugs I‘ve made trying to put my dent in the universe.
-      </p>
-      <div className="grid grid-cols-1 lg:grid-cols-2 p-2 gap-10">
-        {projects &&
-          projects.map((item: Projects, index: number) => (
-            <div
-              key={index}
-              className="border-2 border-secondary rounded-md p-2 cursor-pointer"
-              onClick={() => handleClick(item.url)}>
-              <Image
-                src={item.img}
-                width={1000}
-                height={1000}
-                alt={item.title}
-                loading="lazy"
-              />
-              {/* Pengecekan apakah item.tech ada */}
-              <div className="flex flex-wrap gap-2 mt-2">
-                {item.tech &&
-                  item.tech.map((techItem: string, techIndex: number) => (
+    <div className="min-h-screen  py-10">
+      {/* Hero Section */}
+      <div className="text-center mb-10">
+        <h1 className="text-5xl font-extrabold text-indigo-600">
+          Latest Projects
+        </h1>
+        <p className="text-lg text-gray-600 mt-0">
+          Some code and bugs I’ve made trying to put my dent in the universe.
+        </p>
+      </div>
+
+      {/* Projects Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-5 md:px-10">
+        {projects.map((item: Projects, index: number) => (
+          <div
+            key={index}
+            className="bg-white shadow-lg rounded-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+            <Image
+              src={item.img}
+              width={1000}
+              height={1000}
+              alt={item.title}
+              className="object-cover h-48 w-full"
+              loading="lazy"
+            />
+            <div className="p-6">
+              <h2 className="text-2xl font-semibold text-gray-800 mb-3">
+                {item.title}
+              </h2>
+              <p className="text-sm text-gray-600">{item.description}</p>
+              <div className="flex flex-wrap gap-2 mt-4">
+                {item.tech.map((techItem: string, techIndex: number) => (
+                  <Badge
+                    key={techIndex}
+                    className="px-3 py-1 text-sm font-medium text-white bg-indigo-600 rounded-full hover:bg-indigo-700">
+                    {techItem}
+                  </Badge>
+                ))}
+              </div>
+              <div className="flex flex-wrap gap-2 mt-3">
+                {item.category.map(
+                  (categoryItem: string, categoryIndex: number) => (
                     <Badge
-                      key={techIndex}
-                      className="hover:bg-primary"
-                      variant={"secondary"}>
-                      {techItem}
+                      key={categoryIndex}
+                      className="px-3 py-1 text-sm font-medium text-white bg-indigo-600 rounded-full hover:bg-indigo-700">
+                      {categoryItem}
                     </Badge>
-                  ))}
+                  )
+                )}
               </div>
-              <h2 className="text-primary font-bold text-xl">{item.title}</h2>
-              <p className="text-sm">{item.description}</p>
-              {/* Pengecekan apakah item.category ada */}
-              <div className="flex gap-2 mt-5">
-                {item.category &&
-                  item.category.map(
-                    (categoryItem: string, categoryIndex: number) => (
-                      <Badge key={categoryIndex}>{categoryItem}</Badge>
-                    )
-                  )}
-              </div>
+              {item.url && (
+                <div className="mt-5 text-right">
+                  <button
+                    onClick={() => handleClick(item.url)}
+                    className="flex items-center justify-center gap-2 bg-gray-800 text-white px-4 py-2 rounded-full hover:bg-gray-900 transition-all duration-300">
+                    <FaGithub className="text-xl" />
+                    <span>View on GitHub</span>
+                  </button>
+                </div>
+              )}
             </div>
-          ))}
+          </div>
+        ))}
       </div>
     </div>
   );
@@ -81,11 +101,11 @@ type Projects = {
 
 const projects: Projects[] = [
   {
-    title: "Twitters",
+    title: "StarLaWeb",
     img: "/images/projects/Twitters_Beta.jpg",
     description:
       "The social media website that we manage is the same as other social media with a protection system.",
-    url: "#",
+    url: "https://github.com/faizinuha/StarLaWeb",
     category: ["Web"],
     tech: ["Php Native", "Bootstrap 5", "Tailwind", "Stisla Admin"],
   },
@@ -93,7 +113,7 @@ const projects: Projects[] = [
     title: "S-market",
     img: "/images/projects/S-market.jpg",
     description: "Website untuk master data yang diperlukan aplikasi sekolah",
-    url: "https://tray-again.vercel.app/",
+    url: "https://github.com/faizinuha/Tray_Again",
     category: ["Web"],
     tech: ["Html && Css"],
   },
@@ -102,32 +122,33 @@ const projects: Projects[] = [
     img: "/images/projects/NihonFlixe.jpg",
     description:
       "Website Bioskop Non Template Kami membuat ini dengan Laravel 11 Dan Gunakan Laravel Ui Piur Bootstrap && Css",
-    url: "",
+    url: "https://github.com/faizinuha/Bioskop_V3",
     category: ["Web"],
-    tech: ["Laravel", "Bootstrap", "Jquery", "Laravel Livewire"],
+    tech: ["Laravel", "Bootstrap",'Tailwinds',"Jquery",],
   },
   {
     title: "Online_Shop",
     img: "/images/projects/Onlne_shop.jpg",
     description:
-      "Website ini dari Gabungan Php Native dan Stisla Tahap Pengembangan",
-    url: "",
+      "Website Penjualan Makana basis Php native",
+    url: "https://github.com/faizinuha/online_shop",
     category: ["Online_Shop"],
     tech: ["php Native", "Stisla"],
   },
   {
-    title: "Cooming-soon",
-    img: "/images/projects/Cooming-soon.jpg",
-    description: "Website untuk menghire pekerja dari UT School",
-    url: "",
+    title: "StarMar",
+    img: "/images/projects/StarMar.png",
+    description:
+      "Website media sosial yang merupakan gabungan konsep dari Facebook dan Instagram. Proyek ini menampilkan beberapa komponen serupa, seperti timeline, fitur berbagi status, unggah foto, dan komentar. Dikembangkan oleh dua orang, menggunakan Laravel dan Bootstrap untuk menciptakan pengalaman pengguna yang interaktif dan responsif.",
+    url: "https://github.com/faizinuha/StarMar",
     category: ["Web"],
     tech: ["Laravel", "Bootstrap"],
   },
   {
     title: "Portfolio",
     img: "/images/projects/Portfolio.jpg",
-    description: "My personal portfolio website.",
-    url: "https://portfolio-wine-three-29.vercel.app/",
+    description: "My personal portfolio .",
+    url: "https://github.com/faizinuha/portofolio",
     category: ["Web"],
     tech: ["Html & Css ", "Portfolio"],
   },
@@ -135,18 +156,10 @@ const projects: Projects[] = [
     title: "Aplikasi Laundry Beta",
     img: "/images/projects/download.png",
     description: "Aplikasi untuk layanan laundry dalam versi Beta.",
-    url: "", // No URL provided
+    url: "https://github.com/faizinuha/AplikasiLaundary",
     category: ["App"],
     tech: ["Php", "Bootstrap"],
   },
-  // {
-  //   title: "Aplikasi Laundry Beta",
-  //   img: "/images/projects/download.png",
-  //   description: "Aplikasi untuk layanan laundry dalam versi Beta.",
-  //   url: "", // No URL provided
-  //   category: ["App"],
-  //   tech: ["Php", "Bootstrap"],
-  // },
 ];
 
 export default page;

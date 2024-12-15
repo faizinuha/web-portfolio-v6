@@ -80,4 +80,30 @@ const config = {
   plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
+module.exports = {
+  theme: {
+    extend: {
+      animation: {
+        fadeIn: "fadeIn 1.5s ease-in-out",
+        scaleIn: "scaleIn 0.8s ease-in-out",
+        float: "float 6s ease-in-out infinite",
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        scaleIn: {
+          from: { transform: "scale(0.8)", opacity: "0" },
+          to: { transform: "scale(1)", opacity: "1" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+      },
+    },
+  },
+};
+
 export default config
